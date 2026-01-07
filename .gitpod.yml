@@ -1,1 +1,17 @@
+image: gitpod/workspace-postgres
 
+tasks:
+  - name: Установка зависимостей и запуск
+    init: |
+      cd backend
+      pip install -r requirements.txt
+    command: |
+      cd backend
+      uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+ports:
+  - port: 8000
+    onOpen: open-browser
+    visibility: public
+  - port: 5432
+    onOpen: ignore
